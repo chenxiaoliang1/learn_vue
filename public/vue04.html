@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .class1 {
+            background: #444;
+            color: #eee;
+        }
+        .sites li:nth-child(2n){
+            color: red;
+        }
+        .sites li:nth-child(2n+1){
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <label for="r1">修改颜色</label><input type="checkbox" v-model="use" id="r1">
+    <br><br>
+    <div v-bind:class="{'class1' : use}">
+        v-bind:class 指令
+    </div>
+    <br><br/>
+
+    {{5+5}}<br>
+    {{ ok ? 'YES' : 'NO'}}<br>
+    {{ message.split('').reverse().join('')}}
+    <div v-bind:id="'list-' + id">菜鸟教程</div>
+    <br><br>
+
+    <p v-if="seen">现在你看到我了</p>
+    <template v-if="ok">
+        <h1>菜鸟教程</h1>
+        <h1>学的i技术，更是梦想！</h1>
+        <h1>哈哈哈，打字辛苦啊！！！！</h1>
+    </template>
+    <br><br>
+
+    <pre><a :href="url">菜鸟教程</a> </pre>
+    <br><br>
+
+    <div v-if="Math.random() > 0.5">
+        Sorry
+    </div>
+    <div v-else>
+        Not Sorry
+    </div>
+    <br><br>
+
+    <input v-model="type">
+    <div v-if="type === 'A'">
+        A
+    </div>
+    <div v-else-if="type === 'B'">
+        B
+    </div>
+    <div v-else-if="type === 'C'">
+        C
+    </div>
+    <div v-else>
+        Not A/B/B
+    </div>
+    <br><br>
+
+    <input type="checkbox" v-model="show">
+    <h1 v-show="show">hello</h1>
+    <br><br>
+
+    <ol class="sites">
+        <li v-for="site in sites">
+            {{site.name}}
+        </li>
+    </ol>
+    <br><br>
+
+    <ul class="sites">
+        <template v-for="site in sites">
+            <li>{{ site.name }}</li>
+            <li>-------------</li>
+        </template>
+    </ul>
+    <br><br>
+
+    <ul class="sites">
+        <li v-for="value in object">
+            {{ value }}
+        </li>
+    </ul>
+    <br><br>
+
+    <ul class="sites">
+        <li v-for="(value, key) in object">
+            {{ key }} : {{ value }}
+        </li>
+    </ul>
+    <br><br>
+
+    <ul class="sites">
+        <li v-for="(value, key, index) in object">
+            {{ index+1 }}. {{ key }}{{ value }}
+        </li>
+    </ul>
+    <br><br>
+
+    <ul class="sites">
+        <li v-for="n in 10">
+            {{ n }}
+        </li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            use : false,
+            ok : true,
+            message : 'RUNOOB',
+            id : 1,
+            seen : true,
+            ok : true,
+            url : 'http://www.yiyuntian.top',
+            type : 'A',
+            show : false,
+            sites : [
+                { name : 'Runoob'},
+                { name : 'Google'},
+                { name : 'taobao'}
+            ],
+            object : {
+                name: '菜鸟教程',
+                url: 'http://www.runoob.com',
+                slogan: '学的不仅是技术，更是梦想！'
+            }
+        }
+    });
+</script>
+</body>
+</html>

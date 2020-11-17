@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ message }}</p>
+    <input v-model="message">
+    <br><br>
+
+    <button @click="reverseMessage">反转字符串</button>
+    <br><br>
+
+    {{message | capitalize}}
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('');
+            }
+        },
+        filters: {
+            capitalize: function (value) {
+                if (!value)
+                    return '';
+                // value = value.toString();
+                return value.charAt(0).toLocaleUpperCase() + value.slice(1);
+            }
+        }
+    })
+</script>
+</body>
+</html>
