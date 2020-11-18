@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+<div id="vue_det">
+    <p style="font-size: 12px">计数器：{{ counter }}</p>
+    <button @click="counter++" style="font-size: 25px">点我</button>
+</div>
+
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#vue_det',
+        data: {
+            counter: 1
+        }
+    });
+    vm.$watch('counter', (nval, oval) => {
+       alert('计数器的变化：' + oval + ' 变为 ' + nval + '！');
+    });
+</script>
+</body>
+</html>

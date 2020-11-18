@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+<div id="vue_det">
+    <h1>复选框如果是一个为逻辑值，如果是多个则绑定到同一个数组</h1>
+    <p>单个复选框：</p>
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+
+    <br><br>
+    <p>全选：</p>
+    <input type="checkbox" id="checkboxAll" v-model="checkedAll" @change="changeAllChecked()">
+    <label for="checkboxAll">{{ checkedAll }}</label>
+    <p>多个复选框：</p>
+    <input type="checkbox" id="Runoob" value="R" v-model="checkedNames">
+    <label for="Runoob">Runoob</label>
+    <input type="checkbox" id="Google" value="G" v-model="checkedNames">
+    <label for="Google">Google</label>
+    <input type="checkbox" id="Taobao" value="T" v-model="checkedNames">
+    <label for="Taobao">Taobao</label>
+    <br>
+    <span>选择的值为：{{ checkedNames }}</span>
+
+    <br><br>
+    <p>单选按钮</p>
+    <input type="radio" id="tencent" value="Tencent" v-model="picked">
+    <label for="tencent">腾讯</label>
+    <input type="radio" id="sina" value="Sina" v-model="picked">
+    <label for="sina">新浪</label>
+    <input type="radio" id="baidu" value="Baidu" v-model="picked">
+    <label for="baidu">百度</label>
+    <br>
+    <span>选中的值为：{{ picked }}</span>
+
+    <br><br>
+    <p>select列表</p>
+    <select v-model="selected" name="webSite">
+       <option v-for="option in optionsList" :value="option.value">{{ option.key }}</option>
+    </select>
+    <br>
+    <span>选中的网站是：{{ selected }}</span>
+    <br><br>
+
+    <input v-model.number="age" type="number">{{ age }}
+</div>
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#vue_det',
+        data: {
+            checked : false,
+            checkedNames: [],
+            checkedAttr: ['R', 'G', 'T'],
+            checkedAll: false,
+            picked: 'Sina',
+            optionsList:[
+                {
+                    key:'选择',
+                    value:'Select'
+                },
+                {
+                    key:'淘宝',
+                    value:'taobao'
+                },
+                {
+                    key:'京东',
+                    value:'jingdong'
+                },
+                {
+                    key:'阿里巴巴',
+                    value:'alibaba'
+                },
+                {
+                    key:'亚马逊',
+                    value:'amazon'
+                },
+                {
+                        key:'苏宁',
+                        value:'suning'
+                },
+                {
+                    key:'拼多多',
+                    value:'pinduoduo'
+                }
+            ],
+            selected: 'Select',
+            age: 0
+        },
+        methods: {
+            changeAllChecked: function () {
+                if (this.checkedAll)
+                    this.checkedNames = this.checkedAttr;
+                else
+                    this.checkedNames = [];
+            }
+        },
+        watch: {
+            checkedNames: function () {
+                this.checkedAll = this.checkedNames.length === this.checkedAttr.length;
+            }
+        }
+    })
+</script>
+</body>
+</html>

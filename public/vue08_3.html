@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    省份：
+    <select v-model="province">
+        <option selected="selected">
+            请选择
+        </option>
+        <option :value="p" v-for="p in provinces">
+            {{ p }}
+        </option>
+    </select>
+    城市：
+    <select v-model="city">
+        <option selected="selected">
+            请选择
+        </option>
+        <option :value="c" v-for="c in cities">
+            {{ c }}
+        </option>
+    </select>
+    区县：
+    <select v-model="area">
+        <option selected="selected">
+            请选择
+        </option>
+        <option :value="a" v-for="a in areas">
+            {{ a }}
+        </option>
+    </select>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            province: '请选择',
+            city: '请选择',
+            area: '请选择',
+            provinces: ['广东', '湖南', '湖北', '北京','安徽'],
+            cities: [],
+            areas: [],
+            provinceCities: [
+                {
+                name: '广东',
+                id: 1,
+                child: ['广州', '深圳', '东莞']
+                },
+                {
+                    name: '湖南',
+                    id: 2,
+                    child: ['长沙', '株洲', '湘潭']
+                },
+                {
+                    name: '湖北',
+                    id: 3,
+                    child: ['武汉']
+                },
+                {
+                    name: '北京',
+                    id: 4,
+                    child: ['北京']
+                },
+                {
+                    name: '安徽',
+                    id: 5,
+                    child: ['合肥', '阜阳', '亳州']
+                }
+            ],
+            cityAreas: [
+                {
+                    name: '北京',
+                    id: 41,
+                    child: ['海淀区', '通州区', '密云县']
+                },
+                {
+                    name: '合肥',
+                    id: 51,
+                    child: ['瑶海区', '蜀山区', '肥东县']
+                },
+                {
+                    name: '阜阳',
+                    id: 52,
+                    child: ['颍州区', '颍东区', '颍东区', '临泉县', '太和县', '颍上县', '阜南县', '界首市']
+                },
+                {
+                    name: '亳州',
+                    id: 53,
+                    child: ['利辛县', '蒙城县', '谯城区']
+                },
+            ]
+        },
+        watch: {
+            province: function (nval, oval) {
+                if (nval === '请选择')
+                    this.cities = [];
+                if (nval !== oval){
+                    for (let i = 0; i < this.provinceCities.length; i++){
+                        if (this.provinceCities[i].name === nval) {
+                            this.cities = this.provinceCities[i].child;
+                        }
+                    }
+                    this.city = '请选择';
+                }
+            },
+            city: function (nval, oval) {
+                if (nval === '请选择')
+                    this.areas = [];
+                if (nval !== oval){
+                    for (let i = 0; i < this.cityAreas.length; i++){
+                        if (this.cityAreas[i].name === nval) {
+                            this.areas = this.cityAreas[i].child;
+                        }
+                    }
+                    this.area = '请选择';
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

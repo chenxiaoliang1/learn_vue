@@ -7,26 +7,52 @@
 </head>
 <body>
 <div id="app">
-    <p>{{ message }}</p>
-    <input v-model="message">
+    <p>原始字符串：{{ message }}</p>
+    <p>计算后反转字符串：{{ reversedMessage }}</p>
+    <p>使用方法后反转字符串：{{ reversedMessage2() }}</p>
     <br><br>
 
-    <button @click="reverseMessage">反转字符串</button>
-
+    <p>{{ site }}</p>
 </div>
 
 <script>
-    new Vue({
+    let vm = new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue.js!'
+            message: 'Hello Vue.js!',
+            name: 'Google',
+            url: 'http://www.google.com'
+        },
+        computed: {
+            // 计算属性的 getter
+            reversedMessage: function () {
+                // `this` 指向 vm 实例
+                return this.message.split('').reverse().join('');
+            },
+            site: {
+                // getter
+                get: function () {
+                    return this.name + ' ' + this.url;
+                },
+                // setter
+                set: function (newValue) {
+                    const names = newValue.split(' ');
+                    this.name = names[0]
+                    this.url = names[names.length - 1]
+                }
+            }
         },
         methods: {
-            reverseMessage: function () {
-                this.message = this.message.split('').reverse().join('');
+            reversedMessage2: function () {
+                return this.message.split('').reverse().join('');
             }
         }
     })
+    // 调用 setter， vm.name 和 vm.url 也会被对应更新
+    vm.site = '菜鸟教程 http://www.runoob.com';
+    document.write('name: ' + vm.name);
+    document.write('<br>')
+    document.write('url: ' + vm.url)
 </script>
 </body>
 </html>

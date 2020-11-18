@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style type="text/css">
+        table {
+            border: 1px solid black;
+            width: 100%;
+        }
+        td {
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<div id="books">
+    <table>
+        <thead>
+            <tr>
+                <td>序列号</td>
+                <td>书名</td>
+                <td>价格</td>
+                <td>数量</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="book in books">
+                <td>{{ book.id }}</td>
+                <td>{{ book.name }}</td>
+                <td>￥{{ book.price }}</td>
+                <td>
+                    <button @click="book.count-=1">-</button>
+                    {{ book.count }}
+                    <button @click="book.count+=1">+</button>
+                </td>
+                <td>
+                    <button @click="book.count=0">移除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>总价：￥{{ totalPrice() }} <button @click="clear()">移除所有</button> <button @click="allAddOne()">所有加1</button> </p>
+</div>
+
+<script>
+    new Vue({
+        el: '#books',
+        data: {
+            books: [
+                {
+                    id: 1,
+                    name: "瓦尔登湖",
+                    price: 59.60,
+                    count: 1
+                },
+                {
+                    id: 2,
+                    name: "平凡的世界",
+                    price: 74.00,
+                    count: 1
+                },
+                {
+                    id: 3,
+                    name: "红岩",
+                    price: 32.50,
+                    count: 1
+                },
+                {
+                    id: 4,
+                    name: "围城",
+                    price: 68.90,
+                    count: 1
+                }
+            ]
+        },
+        methods: {
+          totalPrice: function () {
+              let sum = 0;
+              for (let i = 0; i <= this.books.length -1; i++) {
+                  sum += this.books[i].price * this.books[i].count;
+              }
+              return sum.toFixed(2);
+          },
+            clear: function () {
+                for (let i = 0; i <= this.books.length -1; i++) {
+                    this.books[i].count = 0;
+                }
+            },
+            allAddOne: function () {
+                for (let i = 0; i <= this.books.length -1; i++) {
+                    this.books[i].count++;
+                }
+            }
+
+        }
+    });
+</script>
+</body>
+</html>
