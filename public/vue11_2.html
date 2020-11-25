@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ total }}</p>
+    <counter-button @increment="incrementTotal"></counter-button>
+    <counter-button @increment="incrementTotal"></counter-button>
+</div>
+
+<script>
+    Vue.component("counter-button", {
+        template: '<div><button @click="incrementHandler(1)">-</button>{{ counter }}<button @click="incrementHandler(2)">+</button></div>',
+        data: function() {
+            return {
+               counter: 0
+            }
+        },
+        /*data: {
+            counter: 0
+        },*/
+        methods: {
+            incrementHandler: function (val) {
+                if (val === 1){
+                    this.counter--;
+                    this.$emit('increment', 1);
+                } else {
+                    this.counter++;
+                    this.$emit('increment', 2);
+                }
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            total: 0
+        },
+        methods: {
+            incrementTotal: function (val) {
+                if (val === 1)
+                    this.total--;
+                else
+                    this.total++;
+            }
+        }
+    })
+</script>
+</body>
+</html>
